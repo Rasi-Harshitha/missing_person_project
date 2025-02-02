@@ -1,0 +1,23 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block content%}
+<h1>Case Details</h1>
+
+<div class="case-details">
+    <p><strong>Name:</strong> {{ case.name }}</p>
+    <p><strong>Age:</strong> {{ case.age }}</p>
+    <p><strong>Location:</strong> {{ case.location }}</p>
+    <p><strong>Date Missing:</strong> {{ case.date_missing }}</p>
+
+    {% if case.photo %}
+        <p><strong>Photo:</strong></p>
+        <img src="{{ case.photo.url }}" alt="Case Photo" width="300">
+    {% else %}
+        <p><strong>No Photo Available</strong></p>
+    {% endif %}
+</div>
+
+<div class="back-link">
+    <a href="{% url 'admin_interface:registered_cases' %}" class="btn">Back to Registered Cases</a>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="dashboard-container">
+        <h1>Admin Dashboard</h1>
+        <div class="buttons">
+            <a href="{% url 'admin_interface:register_person' %}" class="btn">Register Person</a>
+<a href="{% url 'admin_interface:matched_cases' %}" class="btn">Matched Cases</a>
+<a href="{% url 'admin_interface:registered_cases' %}" class="btn">Registered Cases</a>
+<a href="{% url 'admin_interface:reported_cases' %}" class="btn">Reported Cases</a>
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f7fa;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    h1 {
+        font-size: 28px;
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .table th, .table td {
+        padding: 12px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    .table th {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .table td {
+        background-color: #fff;
+    }
+
+    .img-thumbnail {
+        border-radius: 6px;
+    }
+
+    .btn {
+        padding: 8px 15px;
+        background-color: #f44336;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #d32f2f;
+    }
+
+    .btn-danger {
+        background-color: #f44336;
+    }
+
+    .btn-danger:hover {
+        background-color: #d32f2f;
+    }
+
+    p {
+        text-align: center;
+        font-size: 18px;
+        color: #666;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .table th, .table td {
+            font-size: 14px;
+            padding: 8px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+        }
+    }
+</style>
+
+<div class="container">
+    <h2>Matched Cases</h2>
+    <table border="1">
+        <tr>
+            <th>Registered Case</th>
+            <th>Reported Case</th>
+            <th>Similarity Score</th>
+        </tr>
+        {% for match in matches %}
+        <tr>
+            <td><img src="{{ match.admin_case.image.url }}" width="100"></td>
+            <td><img src="{{ match.user_reported_case.image.url }}" width="100"></td>
+            <td>{{ match.similarity_score }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+{% endblock %}

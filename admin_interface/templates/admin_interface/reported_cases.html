@@ -1,0 +1,46 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Reported Cases</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>Date Reported</th>
+                <th>Description</th>
+                <th>Photo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for case in cases %}
+                <tr>
+                    <td>{{ case.location }}</td>
+                    <td>{{ case.date_reported }}</td>
+                    <td>{{ case.description }}</td>
+                    <td>
+                        {% if case.photo %}
+                            <img src="{{ case.photo.url }}" alt="Case Photo" width="100">
+                        {% else %}
+                            No Photo
+                        {% endif %}
+                    </td>
+                    <td class="actions">
+                        <!-- Delete button now includes case_type -->
+                        <form method="POST" action="{% url 'admin_interface:delete_case' case.id 'reported' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this case?');">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5" class="empty-message">No cases reported yet.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

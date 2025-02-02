@@ -1,0 +1,15 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+<h1>Confirm Deletion</h1>
+
+<p>Are you sure you want to delete the case of {{ case.name }}?</p>
+{% block content %}
+<!-- Form to confirm deletion -->
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="{% url 'admin_interface:registered_cases' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
+

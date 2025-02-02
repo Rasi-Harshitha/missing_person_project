@@ -1,0 +1,332 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Home - Missing Person Identification</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: url("{% static 'images/hero-background.jpg' %}"); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgb(247, 242, 242);
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            text-shadow: 2px 2px 4px rgb(237, 237, 237);
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: space-around;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        nav ul li a:hover {
+            background-color: #0073e6;
+            border-radius: 5px;
+        }
+
+        /* Welcome Section Styling */
+        .welcome-section {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #fff;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .welcome-section h2 {
+            color: #0073e6;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .welcome-section p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        /* Report Form Section Styling */
+        .report-form {
+            background-color: #fff;
+            padding: 40px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .report-form h2 {
+            color:rgb(2, 10, 18);
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .report-form p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        /* Consolidated Button Styling */
+        .button, button, .btn {
+            display: inline-block;
+            background-color:rgba(2, 0, 0, 0.53);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            width: auto;
+            text-align: center;
+        }
+
+        .button:hover, button:hover, .btn:hover {
+            background-color: #005bb5;
+        }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+
+        /* Responsive Design for Mobile */
+        @media (max-width: 768px) {
+            .hero {
+                background-image: url('{% static "images/img.webp" %}');
+                background-size: cover;
+                background-position: center;
+                color: white;
+                padding: 100px 20px;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .hero-content p {
+                font-size: 18px;
+            }
+
+            .welcome-section, .report-form {
+                padding: 20px;
+            }
+
+            .report-form .button, .report-form .btn, .report-form button {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Login & Dashboard Containers */
+        .login-container, .dashboard-container {
+            max-width: 400px;
+            margin: 100px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        input, button, .btn {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        /* Global Form Styles */
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color:rgb(0, 0, 0);
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        img {
+            max-width: 100px;
+            border-radius: 5px;
+        }
+
+        /* Header Styles */
+        h1 {
+            color: #343a40;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Dashboard Styles */
+        .dashboard-container {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .dashboard-container h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-container .buttons a {
+            margin: 10px;
+        }
+
+        /* Messages Styles */
+        .messages {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+
+    </style>   
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><!-- In a template, reverse the URL using the namespace -->
+                    <a href="{% url 'admin_interface:admin_login' %}">Admin Login</a>
+                    
+                <li><a href="{% url 'report_missing_person' %}">Report Missing Person</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section with Background Image and Text -->
+    <section class="hero"  style="background-image: url('{% static 'images/img1.webp' %}');">
+        <div class="hero-content">
+            <h1>Welcome to Missing Person Identification</h1>
+            <p>Your help can bring a missing person back home. Report a missing person today!</p>
+        </div>
+    </section>
+
+   
+
+    <section class="report-form">
+        <h2>Report a Missing Person</h2>
+        <p>If you suspect someone is missing, please provide the details below to help us locate them.</p>
+        <a href="{% url 'report_missing_person' %}" class="button">Report Now</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Missing Person Identification. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

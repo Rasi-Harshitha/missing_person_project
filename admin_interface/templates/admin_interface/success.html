@@ -1,0 +1,7 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block content %}
+    <h1>{{ message }}</h1>
+    <p>Success</p>
+    <a href="{% url 'admin_interface:dashboard' %}">Go to Dashboard</a>
+    {% endblock %}
