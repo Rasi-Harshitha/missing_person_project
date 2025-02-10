@@ -2,15 +2,18 @@
 {% load static %}
 
 {% block content %}
-    <h1>Registered Missing Cases</h1>
-    <p>Below are the missing persons that have been reported to the system.</p>
+<div class="reg-container">
 
+    <h1>Registered Missing Cases</h1>
+    <p>Below are the missing persons that have been registered to the system.</p>
+</div>
+<div class="reg-table">
     <table>
         <thead>
             <tr>
                 <th>Name</th>
                 <th>Age</th>
-                <th>Location</th>
+                {% comment %} <th>Location</th> {% endcomment %}
                 <th>Date Missing</th>
                 <th>Photo</th>
                 <th>Actions</th>
@@ -21,7 +24,7 @@
                 <tr>
                     <td>{{ case.name }}</td>
                     <td>{{ case.age }}</td>
-                    <td>{{ case.location }}</td>
+                    {% comment %} <td>{{ case.address}}</td> {% endcomment %}
                     <td>{{ case.date_missing }}</td>
                     <td>
                         {% if case.photo %}
@@ -31,7 +34,9 @@
                         {% endif %}
                     </td>
                     <td class="actions">
-                        <!-- Delete button now includes case_type -->
+                        
+                        <!-- View Age Progressed Image Button -->
+                        <a href="{% url 'admin_interface:view_age_progressed' case.id %}" class="btn btn-primary">View Age Progressed</a>
                         <form method="POST" action="{% url 'admin_interface:delete_case' case.id 'registered' %}">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this case?');">Delete</button>
@@ -45,9 +50,5 @@
             {% endfor %}
         </tbody>
     </table>
-
-    {% comment %} <div class="add-case-link">
-        <a href="{% url 'admin_interface:add_case' %}">Add New Case</a>
-    </div> {% endcomment %}
-
+</div>
 {% endblock %}

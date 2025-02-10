@@ -1,5 +1,9 @@
 from django.db import models
 
+
+
+
+
 class RegisteredPerson(models.Model):
     name = models.CharField(max_length=100)
     age = models.IntegerField()
@@ -28,10 +32,15 @@ class ReportedCase(models.Model):
 
 class MatchedCase(models.Model):
     registered_person = models.ForeignKey(RegisteredPerson, on_delete=models.CASCADE)
-    reported_case = models.ForeignKey(ReportedCase, on_delete=models.CASCADE)
+    reported_case = models.ForeignKey('user.ReportedCase', on_delete=models.CASCADE)
     match_percentage = models.FloatField()  # ADD THIS FIELD
     match_date = models.DateTimeField(auto_now_add=True)
-
+    class Meta:
+        unique_together = ('registered_person', 'reported_case')  # This constraint goes here
     def __str__(self):
         return f"{self.registered_person.name} matched with {self.reported_case.name} ({self.match_percentage * 100:.2f}%)"
+class AgeProgressedImage(models.Model):
+    registered_person = models.ForeignKey(RegisteredPerson, on_delete=models.CASCADE,related_name="age_progressed_images")
+    age_target = models.IntegerField()
+    photo = models.ImageField(upload_to='age_progressed/')
     

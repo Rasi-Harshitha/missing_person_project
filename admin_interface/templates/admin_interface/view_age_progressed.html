@@ -1,0 +1,20 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Age Progressed Images for {{ person.name }}</h2>
+  
+{% if images %}
+  <div class="images-gallery">
+    {% for image in images %}
+      <div class="image-container">
+        <img src="{{ image.photo.url }}" alt="Age Progressed Image">
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>No age-progressed images available.</p>
+{% endif %}
+
+<a href="{% url 'admin_interface:registered_cases' %}" class="btn btn-secondary">Back to Registered Cases</a>
+{% endblock %}

@@ -5,325 +5,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Home - Missing Person Identification</title>
-    <style>
-        /* Global Styles */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
-
-        /* Hero Section */
-        .hero {
-            background-image: url("{% static 'images/hero-background.jpg' %}"); /* Replace with your image path */
-            background-size: cover;
-            background-position: center;
-            height: 400px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .hero-content h1 {
-            font-size: 48px;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgb(247, 242, 242);
-        }
-
-        .hero-content p {
-            font-size: 20px;
-            text-shadow: 2px 2px 4px rgb(237, 237, 237);
-        }
-
-        /* Header Styling */
-        header {
-            background-color: #333;
-            color: white;
-            padding: 1rem;
-        }
-
-        nav ul {
-            list-style-type: none;
-            display: flex;
-            justify-content: space-around;
-            margin: 0;
-            padding: 0;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            padding: 10px;
-        }
-
-        nav ul li a:hover {
-            background-color: #0073e6;
-            border-radius: 5px;
-        }
-
-        /* Welcome Section Styling */
-        .welcome-section {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: #fff;
-            margin: 20px 0;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .welcome-section h2 {
-            color: #0073e6;
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-
-        .welcome-section p {
-            font-size: 18px;
-            color: #555;
-        }
-
-        /* Report Form Section Styling */
-        .report-form {
-            background-color: #fff;
-            padding: 40px;
-            margin: 20px 0;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .report-form h2 {
-            color:rgb(2, 10, 18);
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-
-        .report-form p {
-            font-size: 18px;
-            margin-bottom: 20px;
-            color: #555;
-        }
-
-        /* Consolidated Button Styling */
-        .button, button, .btn {
-            display: inline-block;
-            background-color:rgba(2, 0, 0, 0.53);
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            font-size: 18px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-            width: auto;
-            text-align: center;
-        }
-
-        .button:hover, button:hover, .btn:hover {
-            background-color: #005bb5;
-        }
-
-        /* Footer Styling */
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #333;
-            color: #fff;
-        }
-
-        footer p {
-            font-size: 14px;
-        }
-
-        /* Responsive Design for Mobile */
-        @media (max-width: 768px) {
-            .hero {
-                background-image: url('{% static "images/img.webp" %}');
-                background-size: cover;
-                background-position: center;
-                color: white;
-                padding: 100px 20px;
-                text-align: center;
-            }
-
-            .hero-content h1 {
-                font-size: 36px;
-            }
-
-            .hero-content p {
-                font-size: 18px;
-            }
-
-            .welcome-section, .report-form {
-                padding: 20px;
-            }
-
-            .report-form .button, .report-form .btn, .report-form button {
-                width: 100%;
-                text-align: center;
-            }
-        }
-
-        /* Login & Dashboard Containers */
-        .login-container, .dashboard-container {
-            max-width: 400px;
-            margin: 100px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        input, button, .btn {
-            display: block;
-            width: 100%;
-            margin: 10px 0;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-        }
-
-        /* Global Form Styles */
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-        }
-
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            background-color:rgb(0, 0, 0);
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
-            border: none;
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background-color: #c82333;
-        }
-
-        /* Table Styles */
-        table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-        }
-
-        table th, table td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        table th {
-            background-color: #007bff;
-            color: white;
-        }
-
-        img {
-            max-width: 100px;
-            border-radius: 5px;
-        }
-
-        /* Header Styles */
-        h1 {
-            color: #343a40;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        /* Dashboard Styles */
-        .dashboard-container {
-            text-align: center;
-            padding: 50px 20px;
-        }
-
-        .dashboard-container h1 {
-            font-size: 36px;
-            margin-bottom: 30px;
-        }
-
-        .dashboard-container .buttons a {
-            margin: 10px;
-        }
-
-        /* Messages Styles */
-        .messages {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-    </style>
-
-    </style>   
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
+
+    <!-- Header with Logo and Navigation -->
     <header>
+        <div class="logo-container">
+            <img src="{% static 'images/logo.webp' %}" alt="Reunite Logo" class="logo img">
+            <span class="brand-name">REUNITE</span>
+        </div>
         <nav>
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
-                <li><!-- In a template, reverse the URL using the namespace -->
-                    <a href="{% url 'admin_interface:admin_login' %}">Admin Login</a>
-                    
+                <li><a href="{% url 'admin_interface:admin_login' %}">Admin</a></li>
                 <li><a href="{% url 'report_missing_person' %}">Report Missing Person</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Hero Section with Background Image and Text -->
-    <section class="hero"  style="background-image: url('{% static 'images/img1.webp' %}');">
+    <!-- Hero Section -->
+    <section class="hero">
         <div class="hero-content">
-            <h1>Welcome to Missing Person Identification</h1>
+            <h1>A Framework for Face Matching and Age Progression in Missing Person Identification</h1>
             <p>Your help can bring a missing person back home. Report a missing person today!</p>
         </div>
+        <div class="hero-image">
+            <img src="{% static 'images/back1.webp' %}" alt="Missing Person Image">
+        </div>
+        
     </section>
 
-   
-
+    <!-- Report Form Section -->
     <section class="report-form">
         <h2>Report a Missing Person</h2>
         <p>If you suspect someone is missing, please provide the details below to help us locate them.</p>
         <a href="{% url 'report_missing_person' %}" class="button">Report Now</a>
     </section>
+    <section class="about-us">
+        <h2>ABOUT US</h2>
+        <div class="about-container">
+            <div class="about-box">
+                <p>The thought of a family member, a friend or someone else you care about going missing can be terrifying. We at FaceFind help find your loved ones using Face Recognition Technologies. If someone you know is missing, then,</p>
+                <ul>
+                    <li>&#10004; Register the missing person with us.</li>
+                    <li>&#10004; We will contact you for a background check.</li>
+                    <li>&#10004; Once verified, the missing person is added to our database of missing people.</li>
+                    <li>&#10004; When volunteers report a suspected missing person, we use face recognition to identify a potential match with our database.</li>
+                    <li>&#10004; If a match is found we will report to the local authorities and contact you.</li>
+                </ul>
+                
+            </div>
+            <div class="about-box">
+                <p>It is estimated that a child goes missing in India every eight minutes. Millions end up in forced labour, domestic slavery and sex work, in what’s become a lucrative industry. If you ever suspect a person could have been trafficked this way,</p>
+                <ul>
+                    <li>&#10004; Report the suspected person.</li>
+                    <li>&#10004; We will cross-verify the report to check its validity.</li>
+                    <li>&#10004; Once verified, use face recognition to identify a potential match with our database of missing people.</li>
+                    <li>&#10004; If a match is found we will report to the local authorities and contact the family/guardian.</li>
+                </ul>
+                
+            </div>
+        </div>
+    </section>
+    
+    <section class="technology-section">
+        <h2 class="section-title">Technology</h2>
+        <p class="section-subtitle">
+            To achieve our goal of finding missing people, we make use of the following technologies:
+        </p>
 
+        <div class="tech-container">
+            <div class="tech-card">
+                <i class="fas fa-laptop-code"></i>
+                <h3>HTML</h3>
+                <p>HTML structures web pages using elements like headings, paragraphs, and links, defining the content and layout.</p>
+            </div>
+
+            <div class="tech-card">
+                <i class="fas fa-code"></i>
+                <h3>Django</h3>
+                <p>A free and open-source, high-level Python-based web framework that enables rapid development of secure and maintainable websites.</p>
+            </div>
+
+            <div class="tech-card">
+                <i class="fas fa-brain"></i>
+                <h3>CSS</h3>
+                <p>CSS (Cascading Style Sheets) styles web pages by controlling colors, fonts, and layout, ensuring a responsive design across devices.</p>
+            </div>
+            <div class="tech-card">
+                <i class="fas fa-database"></i>
+                <h3>SQLite</h3>
+                <p>An in-process library that implements a self-contained, serverless, zero-configuration, transactional SQL database engine.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
     <footer>
         <p>&copy; 2025 Missing Person Identification. All rights reserved.</p>
     </footer>

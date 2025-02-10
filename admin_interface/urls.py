@@ -16,8 +16,9 @@ urlpatterns = [
     path('view_case/<int:case_id>/', views.view_case, name='view_case'),  
     path('delete_case/<int:case_id>/', views.delete_case, name='delete_case'),  
     path('delete_case/<int:case_id>/<str:case_type>/', views.delete_case, name='delete_case'),
+    path('age-progress/', views.age_progress_view, name='age_progress'),
+    path('view_age_progressed/<int:registered_person_id>/', views.view_age_progressed, name='view_age_progressed'),
 
 ]
-
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

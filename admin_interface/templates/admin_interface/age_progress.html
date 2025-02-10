@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Progression</title>
+    <style>
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .image-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Age Progression</h1>
+
+        <!-- Form for uploading image and age target -->
+        <form id="ageProgressForm" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                <label for="photo">Upload Photo:</label>
+                <input type="file" name="photo" id="photo" required>
+            </div>
+
+            <div>
+                <label for="age_target">Target Age (+5 years):</label>
+                <input type="number" name="age_target" id="age_target" required>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <!-- Display error messages -->
+        <div class="error" id="error-message"></div>
+
+        <!-- Display processed image -->
+        <div class="image-container" id="image-container">
+            <h2>Processed Image:</h2>
+            <img id="processedImage" src="" alt="Processed Age Image" style="display:none;">
+        </div>
+    </div>
+
+    <script>
+        // Handle form submission
+        document.getElementById('ageProgressForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            const ageTarget = document.getElementById('age_target').value;
+
+            // Ensure the user has selected a photo and entered an age target
+            if (!formData.get('photo') || !ageTarget) {
+                document.getElementById('error-message').innerText = 'Please provide both an image and an age target.';
+                return;
+            }
+
+            try {
+                // Send the form data to the Django view (this will be routed to the Flask API)
+                const response = await fetch("{% url 'admin_interface:age_progress' %}", {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // If successful, show the processed image
+                    const processedImageBase64 = data.processed_image;
+                    const imgElement = document.getElementById('processedImage');
+                    imgElement.src = 'data:image/jpeg;base64,' + processedImageBase64;
+                    imgElement.style.display = 'block';
+                    document.getElementById('error-message').innerText = '';
+                } else {
+                    // If there's an error, show the error message
+                    document.getElementById('error-message').innerText = data.error || 'An error occurred while processing the image.';
+                }
+            } catch (error) {
+                document.getElementById('error-message').innerText = 'Something went wrong. Please try again later.';
+            }
+        });
+    </script>
+</body>
+</html>

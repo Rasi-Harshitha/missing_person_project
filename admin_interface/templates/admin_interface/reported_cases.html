@@ -2,11 +2,17 @@
 {% load static %}
 
 {% block content %}
-    <h1>Reported Cases</h1>
 
+<div class="rep-container">
+
+    <h1>Reported Missing Cases</h1>
+    <p>Below are the missing persons that have been reported to the system.</p>
+</div>
+<div class="rep-table">
     <table>
         <thead>
             <tr>
+                <th>Name</th>
                 <th>Location</th>
                 <th>Date Reported</th>
                 <th>Description</th>
@@ -17,8 +23,9 @@
         <tbody>
             {% for case in cases %}
                 <tr>
+                    <td>{{case.name}}</td>
                     <td>{{ case.location }}</td>
-                    <td>{{ case.date_reported }}</td>
+                    <td>{{ case.reported_date}}</td>
                     <td>{{ case.description }}</td>
                     <td>
                         {% if case.photo %}
@@ -42,5 +49,6 @@
             {% endfor %}
         </tbody>
     </table>
+</div>
 
 {% endblock %}
